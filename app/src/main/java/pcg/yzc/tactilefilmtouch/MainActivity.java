@@ -17,8 +17,22 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        return super.onTouchEvent(event);
+    public boolean dispatchTouchEvent(MotionEvent e) {
+        StringBuilder strB = new StringBuilder();
+        String text = "";
+        for (int i = 0; i < e.getPointerCount(); ++i) {
+            int id = e.getPointerId(i);
+            int x = (int) e.getX(i);
+            int y = (int) e.getY(i);
+            float p = e.getPressure(i);
+            float s = e.getSize(i);
+            strB.append("Id:" + id + " X:" + x + " Y:" + y);
+            strB.append(" S:" + String.format("%.2f", s) + " P:" + String.format("%.2f", p) + "\n");
+        }
+        if (e.getAction() == MotionEvent.ACTION_UP)
+            textView_touchInfo.setText("");
+        else
+            textView_touchInfo.setText(strB.toString());
+        return super.dispatchTouchEvent(e);
     }
 }
