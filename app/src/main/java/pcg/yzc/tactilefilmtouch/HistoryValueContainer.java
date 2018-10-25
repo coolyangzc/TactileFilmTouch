@@ -5,12 +5,10 @@ import java.util.Queue;
 
 public class HistoryValueContainer {
 
-    public double value = 0;
-
     private Queue<Double> values = new LinkedList<Double>();
     private Queue<Long> timestamps = new LinkedList<Long>();
 
-    private double ms, lowWeight, recent;
+    private double ms, lowWeight, recent, value = 0;
 
     HistoryValueContainer(double ms, double lowWeight) {
         this.ms = ms;
@@ -19,6 +17,10 @@ public class HistoryValueContainer {
 
     public double getValue() {
         return value;
+    }
+
+    public double getRecent() {
+        return recent;
     }
 
     public double getDelta() {
